@@ -2,17 +2,16 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class Board implements ActionListener
-{
-    
-    // create 64 instance of your squre object using the square class constructor
+public class Board implements ActionListener{
 
-    // image object declaration
+    Square[] squares = new Square[63];
+    
+    // Image object declaration
     private ImageIcon whiteEmpty = new ImageIcon("empty.png");
     private ImageIcon blackEmpty = new ImageIcon("empty2.png");
     private ImageIcon white = new ImageIcon("white.png");
     private ImageIcon red = new ImageIcon("red.png");
-    private  ImageIcon whiteKing = new ImageIcon ("white-king.png");
+    private ImageIcon whiteKing = new ImageIcon ("white-king.png");
     private ImageIcon redKing = new ImageIcon("red-king.png");
 
     private Square firstClick = null;
@@ -22,7 +21,44 @@ public class Board implements ActionListener
     private JFrame frame;
 
     // Constructor goes here
+    public Board(){
+        
+        // Creating 64 Squares
+        int counter = 0;
+        boolean whiteField = false;
 
+        for(int row = 1 ; row < 9 ; row++){
+            for(int col = 1 ; col < 9 ; col++){
+            
+                squares[counter] = new Square(row , col , whiteField);
+                counter++;
+
+                // Checking whether the next Field should be white or black to pass that variable into the constructor
+                if(counter == 8 || counter == 16 || counter == 24 || counter == 32 || counter == 40 || counter == 48 || counter == 56){
+                // Nothing Happens so whiteField stays the same at row swap
+                }else if(whiteField == false){
+                        whiteField = true;
+                }else{
+                        whiteField = false;
+                    }
+            }
+        }
+
+        // Now use swing to create an 8 times 8 grid and then assign the black or white field to it.
+        // Creating the 8x8 Grid and adding black and white squares to them.
+        frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(700, 700);
+        frame.setLayout(new GridLayout(8,8));
+        for(int i = 0 ; i < 64 ; i ++){
+            if(squares[i].getFieldColor() == false){
+                frame.add(new JButton(blackEmpty));
+            }else{
+                frame.add(new JButton(whiteEmpty));
+            }   
+        }
+        frame.setVisible(true);
+    }
     
 
     // method to check what action is performed goes here

@@ -8,13 +8,44 @@ public class Square extends JButton
     private int row;
     private int col;
 
+    // Added Instance Variable
+    private boolean fieldColor;
+
+   
+    //Getter Methods for Instance Variables
+    public int getRow(){
+        return this.row;
+    }
+    public int getCol(){
+        return this.col;
+    }
+    public boolean getFieldColor(){
+        return this.fieldColor;
+    }
+
+
     // intialize private instace objects
 
    
 
     // declare your constructor
+    public Square(int row , int col , boolean whiteField){
+        this.row = row;
+        this.col = col;
 
+        // False is equal to White, True is equal to Black
+        if(whiteField){
+            this.fieldColor = false;
+        }else{
+            this.fieldColor = true;
+        }
+    }
    
+
+
+
+
+
     private String getString(Square square)
     {
         return square.getIcon().toString();
