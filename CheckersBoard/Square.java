@@ -1,16 +1,17 @@
+import javax.imageio.stream.ImageInputStreamImpl;
 import javax.lang.model.util.ElementScanner6;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Square extends JButton
-{
+public class Square extends JButton{
+    
     private final int row;
     private final int col;
 
     // Added Instance Variable
     private final String fieldColor;
-    private ImageIcon icon;
+    private ImageIcon currentImage;
    
     //Getter Methods for Instance Variables
     public int getRow(){
@@ -25,17 +26,28 @@ public class Square extends JButton
         return this.fieldColor;
     }
 
+    public ImageIcon getImageIcon(){
+        return this.currentImage;
+    }
+
+
+    //Setter methods
+    public void setImageIcon(ImageIcon image){
+        this.currentImage = image;
+        this.setIcon(image);
+    }
 
     // intialize private instance objects
 
    
 
     // declare your constructor
-    public Square(int row , int col, ImageIcon icon, boolean whiteField){
+    public Square(int row , int col, ImageIcon image, boolean whiteField){
         this.row = row;
         this.col = col;
-        this.icon = icon;
-        
+        this.currentImage = image;
+        this.setIcon(this.currentImage);
+
         if(whiteField){
             this.fieldColor = "white";
         }else{
@@ -44,13 +56,17 @@ public class Square extends JButton
     }
 
 
-    private String getString(Square square)
-    {
+    private String getString(Square square){
         return square.getIcon().toString();
     }
 
-    // create your moveTo method here
 
+    // create your moveTo method here
+    public void moveTo(Square other){
+        ImageIcon temp = other.getImageIcon();
+        other.setImageIcon(this.getImageIcon());
+        this.setImageIcon(temp);
+    }
 
 
     public boolean isValidMove(Square firstClick, boolean setSelected){
