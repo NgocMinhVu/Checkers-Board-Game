@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class Board implements ActionListener{
 
-    Square[] squares = new Square[63];
+    private static Square[] squares = new Square[64];
     
     // Image object declaration
     private ImageIcon whiteEmpty = new ImageIcon("empty.png");
@@ -32,9 +32,9 @@ public class Board implements ActionListener{
                 ImageIcon image;
                 if (whiteField) {
                     if (counter < 24) {
-                        image = white;
-                    } else if (counter > 39) {
                         image = red;
+                    } else if (counter > 39) {
+                        image = white;
                     } else {
                         image = whiteEmpty;
                     }
@@ -46,7 +46,7 @@ public class Board implements ActionListener{
                 squares[counter].addActionListener(this);
 
                 //whiteField stays the same at row swap
-                if(!(counter == 8 || counter == 16 || counter == 24 || counter == 32 || counter == 40 || counter == 48 || counter == 56)){
+                if(!(counter == 7 || counter == 15 || counter == 23 || counter == 31 || counter == 39 || counter == 47 || counter == 55)){
                     whiteField = !whiteField;
                 }
 
@@ -71,13 +71,17 @@ public class Board implements ActionListener{
         if (firstClick == null){
             this.firstClick = (Square)e.getSource();
         } else {
-            this.firstClick.moveTo((Square)e.getSource());
+            Square secondClick = (Square)e.getSource();
+            if (secondClick.isValidMove(firstClick, false)) {
+                this.firstClick.moveTo(secondClick);   
+            }
+            this.firstClick = null;
         }
     }
     
 
     // method to get the centre of the square
-    public Square getCentreSquare(int row, int col){
+    public static Square getCentreSquare(int row, int col){
         for(int i=0; i<64; i++){
             if(squares[i].getRow() == row && squares[i].getCol() == col)
                 return squares[i];
@@ -104,7 +108,7 @@ public class Board implements ActionListener{
     }
 
 
-    // boolean type method to decalre the winner
+    // boolean type method to declare the winner
 
 
     // declare your main method here to run and play the game

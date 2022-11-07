@@ -27,7 +27,14 @@ public class Square extends JButton{
 
 
     // intialize private instance objects
-   
+    private ImageIcon whiteEmpty = new ImageIcon("empty.png");
+    private ImageIcon blackEmpty = new ImageIcon("empty2.png");
+    private ImageIcon white = new ImageIcon("white.png");
+    private ImageIcon red = new ImageIcon("red.png");
+    private ImageIcon whiteKing = new ImageIcon ("white-king.png");
+    private ImageIcon redKing = new ImageIcon("red-king.png");
+    private ImageIcon yellow = new ImageIcon("selected.png");
+
 
     // declare your constructor
     public Square(int row , int col, ImageIcon image, boolean whiteField){
@@ -54,7 +61,7 @@ public class Square extends JButton{
         other.setIcon((ImageIcon)this.getIcon());
         this.setIcon(temp);
     }
-
+    
 
     public boolean isValidMove(Square firstClick, boolean setSelected){
         // red at top going down, white at bottom going up
@@ -64,15 +71,14 @@ public class Square extends JButton{
         if (firstIcon.equals(whiteEmpty.toString()) || firstIcon.equals(blackEmpty.toString()))
             return false;
 
-        
         // is second selection empty
         String secondIcon = getString(this);
         if(!secondIcon.equals(whiteEmpty.toString()))
             return false;
 
         // is it in the right direction
+        // for red pieces
         if(firstIcon.equals(red.toString()) || firstIcon.equals(redKing.toString()) || firstIcon.equals(whiteKing.toString())) {
-
             //single step
             if(firstClick.getRow() + 1 == row){
                 if(Math.abs(firstClick.getCol() - col) == 1){
@@ -93,16 +99,11 @@ public class Square extends JButton{
                             middle.removePiece();
                         return true;
                     }
-                    if(middle != null){
-                        if(!setSelected)
-                            this.setIcon(yellow);
-                        else    
-                            middle.removePiece();
-                        return true;
-                    }
                 }
             }
         }
+
+        //for white pieces
         if(firstIcon.equals(white.toString()) || firstIcon.equals(redKing.toString()) || firstIcon.equals(whiteKing.toString())){
             // single step
             if(firstClick.getRow() - 1 == row){
@@ -142,7 +143,7 @@ public class Square extends JButton{
         else
             midCol = col - 1;
 
-        Square middle = board.getCentreSquare(midRow, midCol);
+        Square middle = Board.getCentreSquare(midRow, midCol);
 
         if(middle == null)
             return null;
