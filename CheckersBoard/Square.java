@@ -5,26 +5,28 @@ import java.awt.event.*;
 
 public class Square extends JButton
 {
-    private int row;
-    private int col;
+    private final int row;
+    private final int col;
 
     // Added Instance Variable
-    private boolean fieldColor;
+    private final String fieldColor;
 
    
     //Getter Methods for Instance Variables
     public int getRow(){
         return this.row;
     }
+
     public int getCol(){
         return this.col;
     }
-    public boolean getFieldColor(){
+
+    public String getFieldColor(){
         return this.fieldColor;
     }
 
 
-    // intialize private instace objects
+    // intialize private instance objects
 
    
 
@@ -33,17 +35,12 @@ public class Square extends JButton
         this.row = row;
         this.col = col;
 
-        // False is equal to White, True is equal to Black
         if(whiteField){
-            this.fieldColor = false;
+            this.fieldColor = "white";
         }else{
-            this.fieldColor = true;
+            this.fieldColor = "false";
         }
     }
-   
-
-
-
 
 
     private String getString(Square square)

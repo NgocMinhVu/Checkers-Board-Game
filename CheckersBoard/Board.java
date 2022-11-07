@@ -27,20 +27,15 @@ public class Board implements ActionListener{
         int counter = 0;
         boolean whiteField = false;
 
-        for(int row = 1 ; row < 9 ; row++){
-            for(int col = 1 ; col < 9 ; col++){
-            
+        for(int row = 1 ; row <= 8 ; row++){
+            for(int col = 1 ; col <= 8 ; col++){
                 squares[counter] = new Square(row , col , whiteField);
                 counter++;
 
-                // Checking whether the next Field should be white or black to pass that variable into the constructor
-                if(counter == 8 || counter == 16 || counter == 24 || counter == 32 || counter == 40 || counter == 48 || counter == 56){
-                // Nothing Happens so whiteField stays the same at row swap
-                }else if(whiteField == false){
-                        whiteField = true;
-                }else{
-                        whiteField = false;
-                    }
+                //whiteField stays the same at row swap
+                if(!(counter == 8 || counter == 16 || counter == 24 || counter == 32 || counter == 40 || counter == 48 || counter == 56)){
+                    whiteField = !whiteField;
+                }
             }
         }
 
