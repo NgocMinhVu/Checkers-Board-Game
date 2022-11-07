@@ -57,11 +57,23 @@ public class Square extends JButton{
 
     // create your moveTo method here
     public void moveTo(Square other){
-        ImageIcon temp = (ImageIcon)other.getIcon();
-        other.setIcon((ImageIcon)this.getIcon());
-        this.setIcon(temp);
+        if (other.getRow() == 1){
+            other.setIcon(whiteKing);
+        } else if (other.getRow() == 8){
+            other.setIcon(redKing);
+        } else {
+            other.setIcon((ImageIcon)this.getIcon());
+        }
+        this.setIcon(whiteEmpty);
     }
-    
+
+    public boolean canMoveTo(Square other){
+            return other.isValidMove(this, false);
+        }
+
+    public boolean isValidPiece(boolean redTurn){
+        return ((this.getString(this).startsWith("white") && redTurn == false)) || ((this.getString(this).startsWith("red") && redTurn == true));
+    }
 
     public boolean isValidMove(Square firstClick, boolean setSelected){
         // red at top going down, white at bottom going up

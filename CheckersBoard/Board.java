@@ -69,13 +69,17 @@ public class Board implements ActionListener{
     // method to check what action is performed goes here
     public void actionPerformed(ActionEvent e){
         if (firstClick == null){
-            this.firstClick = (Square)e.getSource();
+            Square clicked = (Square)e.getSource();
+            if (clicked.isValidPiece(this.redTurn)){
+                this.firstClick = clicked;
+            }
         } else {
             Square secondClick = (Square)e.getSource();
-            if (secondClick.isValidMove(firstClick, false)) {
+            if (this.firstClick.canMoveTo(secondClick)) {
                 this.firstClick.moveTo(secondClick);   
+                this.redTurn = !redTurn;
             }
-            this.firstClick = null;
+            this.firstClick = null; 
         }
     }
     
@@ -113,6 +117,6 @@ public class Board implements ActionListener{
 
     // declare your main method here to run and play the game
     public static void main(String args[]) {
-        Board board = new Board();
+        Board board = new Board();   
     }
 }
