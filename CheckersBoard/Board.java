@@ -29,20 +29,21 @@ public class Board implements ActionListener{
 
         for(int row = 1 ; row <= 8 ; row++){
             for(int col = 1 ; col <= 8 ; col++){
-                ImageIcon icon;
+                ImageIcon image;
                 if (whiteField) {
                     if (counter < 24) {
-                        icon = white;
+                        image = white;
                     } else if (counter > 39) {
-                        icon = red;
+                        image = red;
                     } else {
-                        icon = whiteEmpty;
+                        image = whiteEmpty;
                     }
                 } else {
-                    icon = blackEmpty;
+                    image = blackEmpty;
                 }
 
-                squares[counter] = new Square(row , col , icon, whiteField);
+                squares[counter] = new Square(row , col , image, whiteField);
+                squares[counter].addActionListener(this);
 
                 //whiteField stays the same at row swap
                 if(!(counter == 8 || counter == 16 || counter == 24 || counter == 32 || counter == 40 || counter == 48 || counter == 56)){
@@ -66,6 +67,13 @@ public class Board implements ActionListener{
     
 
     // method to check what action is performed goes here
+    public void actionPerformed(ActionEvent e){
+        if (firstClick == null){
+            this.firstClick = (Square)e.getSource();
+        } else {
+            this.firstClick.moveTo((Square)e.getSource());
+        }
+    }
     
 
     // method to get the centre of the square
@@ -96,7 +104,7 @@ public class Board implements ActionListener{
     }
 
 
-    // boolean pieceType method to decalre the winner
+    // boolean type method to decalre the winner
 
 
     // declare your main method here to run and play the game

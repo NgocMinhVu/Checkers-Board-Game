@@ -26,11 +26,7 @@ public class Square extends JButton{
     }
 
 
-    //Setter methods
-
-
     // intialize private instance objects
-
    
 
     // declare your constructor
