@@ -8,11 +8,9 @@ public class Square extends JButton{
     
     private final int row;
     private final int col;
-
-    // Added Instance Variable
-    private final String fieldColor;
    
-    //Getter Methods for Instance Variables
+
+    //Getter methods
     public int getRow(){
         return this.row;
     }
@@ -21,12 +19,8 @@ public class Square extends JButton{
         return this.col;
     }
 
-    public String getFieldColor(){
-        return this.fieldColor;
-    }
 
-
-    // intialize private instance objects
+    //Image objects declaration
     private ImageIcon whiteEmpty = new ImageIcon("empty.png");
     private ImageIcon blackEmpty = new ImageIcon("empty2.png");
     private ImageIcon white = new ImageIcon("white.png");
@@ -36,26 +30,21 @@ public class Square extends JButton{
     private ImageIcon yellow = new ImageIcon("selected.png");
 
 
-    // declare your constructor
-    public Square(int row , int col, ImageIcon image, boolean whiteField){
+    //Constructor
+    public Square(int row , int col, ImageIcon image){
         this.row = row;
         this.col = col;
         this.setIcon(image);
-
-        if(whiteField){
-            this.fieldColor = "white";
-        }else{
-            this.fieldColor = "black";
-        }
     }
 
 
-    private String getString(Square square){
+    //Get name of image file
+    public String getString(Square square){
         return square.getIcon().toString();
     }
 
 
-    // create your moveTo method here
+    //Move piece
     public void moveTo(Square other){
         if (other.getRow() == 1){
             other.setIcon(whiteKing);
@@ -67,14 +56,20 @@ public class Square extends JButton{
         this.setIcon(whiteEmpty);
     }
 
+
+    //Check if piece can move to square
     public boolean canMoveTo(Square other){
             return other.isValidMove(this, false);
         }
 
+
+    //Check that valid piece is selected to move
     public boolean isValidPiece(boolean redTurn){
         return ((this.getString(this).startsWith("white") && redTurn == false)) || ((this.getString(this).startsWith("red") && redTurn == true));
     }
 
+
+    //Check if move is valid
     public boolean isValidMove(Square firstClick, boolean setSelected){
         // red at top going down, white at bottom going up
 
@@ -91,7 +86,7 @@ public class Square extends JButton{
         // is it in the right direction
         // for red pieces
         if(firstIcon.equals(red.toString()) || firstIcon.equals(redKing.toString()) || firstIcon.equals(whiteKing.toString())) {
-            //single step
+            // single step
             if(firstClick.getRow() + 1 == row){
                 if(Math.abs(firstClick.getCol() - col) == 1){
                     if(setSelected)
@@ -100,7 +95,7 @@ public class Square extends JButton{
                 }
             }
 
-            //leap over
+            // leap over
             else if(firstClick.getRow() + 2 == row){
                 if(Math.abs(firstClick.getCol() - col) == 2){
                     Square middle = checkMiddleIcon(firstClick);
@@ -115,7 +110,7 @@ public class Square extends JButton{
             }
         }
 
-        //for white pieces
+        // for white pieces
         if(firstIcon.equals(white.toString()) || firstIcon.equals(redKing.toString()) || firstIcon.equals(whiteKing.toString())){
             // single step
             if(firstClick.getRow() - 1 == row){
@@ -143,6 +138,7 @@ public class Square extends JButton{
         return false;
     }
 
+
     public Square checkMiddleIcon(Square firstClick){
         int midCol, midRow;
         if(firstClick.getRow() + 2 == row)
@@ -167,10 +163,12 @@ public class Square extends JButton{
         return null;
     }
 
+
     public void resetSelected(){
         if(this.getIcon().toString().equals(yellow.toString()))
             this.setIcon(whiteEmpty);
     }
+
 
     public void removePiece(){
         this.setIcon(whiteEmpty);
