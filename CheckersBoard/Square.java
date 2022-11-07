@@ -10,7 +10,7 @@ public class Square extends JButton
 
     // Added Instance Variable
     private final String fieldColor;
-
+    private ImageIcon icon;
    
     //Getter Methods for Instance Variables
     public int getRow(){
@@ -31,14 +31,15 @@ public class Square extends JButton
    
 
     // declare your constructor
-    public Square(int row , int col , boolean whiteField){
+    public Square(int row , int col, ImageIcon icon, boolean whiteField){
         this.row = row;
         this.col = col;
-
+        this.icon = icon;
+        
         if(whiteField){
             this.fieldColor = "white";
         }else{
-            this.fieldColor = "false";
+            this.fieldColor = "black";
         }
     }
 
@@ -56,7 +57,6 @@ public class Square extends JButton
         // red at top going down, white at bottom going up
 
         //is first selection a piece
-
         String firstIcon = getString(firstClick);
         if (firstIcon.equals(whiteEmpty.toString()) || firstIcon.equals(blackEmpty.toString()))
             return false;
@@ -159,5 +159,4 @@ public class Square extends JButton
     public void removePiece(){
         this.setIcon(whiteEmpty);
     }
-    
 }

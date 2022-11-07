@@ -29,28 +29,37 @@ public class Board implements ActionListener{
 
         for(int row = 1 ; row <= 8 ; row++){
             for(int col = 1 ; col <= 8 ; col++){
-                squares[counter] = new Square(row , col , whiteField);
-                counter++;
+                ImageIcon icon;
+                if (whiteField) {
+                    if (counter < 24) {
+                        icon = white;
+                    } else if (counter > 39) {
+                        icon = red;
+                    } else {
+                        icon = whiteEmpty;
+                    }
+                } else {
+                    icon = blackEmpty;
+                }
+
+                squares[counter] = new Square(row , col , icon, whiteField);
 
                 //whiteField stays the same at row swap
                 if(!(counter == 8 || counter == 16 || counter == 24 || counter == 32 || counter == 40 || counter == 48 || counter == 56)){
                     whiteField = !whiteField;
                 }
+
+                counter++;
             }
         }
 
-        // Now use swing to create an 8 times 8 grid and then assign the black or white field to it.
-        // Creating the 8x8 Grid and adding black and white squares to them.
+        // Create the 8x8 grid and add squares
         frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(700, 700);
+        frame.setSize(800, 800);
         frame.setLayout(new GridLayout(8,8));
-        for(int i = 0 ; i < 64 ; i ++){
-            if(squares[i].getFieldColor() == false){
-                frame.add(new JButton(blackEmpty));
-            }else{
-                frame.add(new JButton(whiteEmpty));
-            }   
+        for (Square square : squares) {
+            frame.add(square);
         }
         frame.setVisible(true);
     }
@@ -60,7 +69,6 @@ public class Board implements ActionListener{
     
 
     // method to get the centre of the square
-    
     public Square getCentreSquare(int row, int col){
         for(int i=0; i<64; i++){
             if(squares[i].getRow() == row && squares[i].getCol() == col)
@@ -68,6 +76,7 @@ public class Board implements ActionListener{
         }
         return null;
     }
+
     public int countRed(){
         int counter = 0;
         for(int i=0; i<64; i++){
@@ -76,6 +85,7 @@ public class Board implements ActionListener{
         }
         return counter;
     }
+
     public int countWhite(){
         int counter = 0;
         for(int i=0; i<64; i++){
@@ -85,10 +95,12 @@ public class Board implements ActionListener{
         return counter;
     }
 
-    // boolean type method to decalre the winner
 
-    
+    // boolean pieceType method to decalre the winner
 
-    // decalre your main method here to run and play the game
-    
+
+    // declare your main method here to run and play the game
+    public static void main(String args[]) {
+        Board board = new Board();
+    }
 }
