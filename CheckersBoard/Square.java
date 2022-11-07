@@ -11,7 +11,6 @@ public class Square extends JButton{
 
     // Added Instance Variable
     private final String fieldColor;
-    private ImageIcon currentImage;
    
     //Getter Methods for Instance Variables
     public int getRow(){
@@ -26,16 +25,9 @@ public class Square extends JButton{
         return this.fieldColor;
     }
 
-    public ImageIcon getImageIcon(){
-        return this.currentImage;
-    }
-
 
     //Setter methods
-    public void setImageIcon(ImageIcon image){
-        this.currentImage = image;
-        this.setIcon(image);
-    }
+
 
     // intialize private instance objects
 
@@ -45,8 +37,7 @@ public class Square extends JButton{
     public Square(int row , int col, ImageIcon image, boolean whiteField){
         this.row = row;
         this.col = col;
-        this.currentImage = image;
-        this.setIcon(this.currentImage);
+        this.setIcon(image);
 
         if(whiteField){
             this.fieldColor = "white";
@@ -63,9 +54,9 @@ public class Square extends JButton{
 
     // create your moveTo method here
     public void moveTo(Square other){
-        ImageIcon temp = other.getImageIcon();
-        other.setImageIcon(this.getImageIcon());
-        this.setImageIcon(temp);
+        ImageIcon temp = (ImageIcon)other.getIcon();
+        other.setIcon((ImageIcon)this.getIcon());
+        this.setIcon(temp);
     }
 
 
