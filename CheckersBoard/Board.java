@@ -6,7 +6,7 @@ public class Board implements ActionListener{
 
     private static Square[] squares = new Square[64];
     
-    // Image object declaration
+    //Image object declaration
     private ImageIcon whiteEmpty = new ImageIcon("empty.png");
     private ImageIcon blackEmpty = new ImageIcon("empty2.png");
     private ImageIcon white = new ImageIcon("white.png");
@@ -18,10 +18,10 @@ public class Board implements ActionListener{
     private JFrame frame;
 
 
-    // Constructor
+    //Constructor
     public Board(){
         
-        // Creating 64 Squares
+        //Creating 64 Squares
         int counter = 0;
         boolean whiteField = false;
 
@@ -43,7 +43,7 @@ public class Board implements ActionListener{
                 squares[counter] = new Square(row , col , image);
                 squares[counter].addActionListener(this);
 
-                // whiteField remains the same at row swap
+                //whiteField remains the same at row swap
                 if(!(counter == 7 || counter == 15 || counter == 23 || counter == 31 || counter == 39 || counter == 47 || counter == 55)){
                     whiteField = !whiteField;
                 }
@@ -52,16 +52,16 @@ public class Board implements ActionListener{
             }
         }
 
-        // Create the 8x8 grid and add squares
-        this.frame = new JFrame();
-        this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.frame.setSize(800, 800);
-        this.frame.setLayout(new GridLayout(8,8));
-        // Add squares to frame
+        //Create the 8x8 grid and add squares
+        frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(800, 800);
+        frame.setLayout(new GridLayout(8,8));
+        //Add squares to frame
         for (Square square : squares) {
-            this.frame.add(square);
+            frame.add(square);
         }
-        this.frame.setVisible(true);
+        frame.setVisible(true);
     }
     
 
@@ -71,13 +71,13 @@ public class Board implements ActionListener{
             if (clicked.isValidPiece(this.redTurn)){
                 this.firstClick = clicked;
 
-                // Highlight potential moves
+                //Highlight potential moves
                 for (Square square : squares){
                     square.isValidMove(this.firstClick, true);
                 }
             }
         } else {
-            // Un-hihglight potential moves
+            //Un-hihglight potential moves
             for (Square square : squares){
                 square.resetSelected();
             }
@@ -88,13 +88,13 @@ public class Board implements ActionListener{
                 this.redTurn = !redTurn;
             }
 
-            // Reset firstClick so that player can pick a different piece to move
+            //Reset firstClick so that player can pick a different piece to move
             this.firstClick = null; 
         }
     }
     
 
-    // Method to get the centre of the square
+    //Method to get the centre of the square
     public static Square getCentreSquare(int row, int col){
         for(int i=0; i<64; i++){
             if(squares[i].getRow() == row && squares[i].getCol() == col)
@@ -104,7 +104,7 @@ public class Board implements ActionListener{
     }
 
 
-    // Count number of red pieces on board
+    //Count number of red pieces on board
     public int countRed(){
         int counter = 0;
         for(int i=0; i<64; i++){
@@ -115,7 +115,7 @@ public class Board implements ActionListener{
     }
 
 
-    // Count number of white pieces on board
+    //Count number of white pieces on board
     public int countWhite(){
         int counter = 0;
         for(int i=0; i<64; i++){
@@ -126,7 +126,7 @@ public class Board implements ActionListener{
     }
 
 
-    // boolean type method to declare the winner
+    //Boolean type method to declare the winner
 
 
     public static void main(String args[]) {
