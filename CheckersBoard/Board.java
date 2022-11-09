@@ -7,10 +7,10 @@ public class Board implements ActionListener{
     private static Square[] squares = new Square[64];
     
     //Image object declaration
-    private ImageIcon whiteEmpty = new ImageIcon("empty.png");
-    private ImageIcon blackEmpty = new ImageIcon("empty2.png");
-    private ImageIcon white = new ImageIcon("white.png");
-    private ImageIcon red = new ImageIcon("red.png");
+    private final ImageIcon whiteEmpty = new ImageIcon("empty.png");
+    private final ImageIcon blackEmpty = new ImageIcon("empty2.png");
+    private final ImageIcon white = new ImageIcon("white.png");
+    private final ImageIcon red = new ImageIcon("red.png");
 
     private Square firstClick = null;
     private boolean redTurn = false;
@@ -53,9 +53,10 @@ public class Board implements ActionListener{
         }
 
         //Create the 8x8 grid and add squares
-        frame = new JFrame();
+        frame = new JFrame("Checkers Board Game");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 800);
+        frame.setResizable(false);
         frame.setLayout(new GridLayout(8,8));
         //Add squares to frame
         for (Square square : squares) {

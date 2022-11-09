@@ -21,13 +21,13 @@ public class Square extends JButton{
 
 
     //Image objects declaration
-    private ImageIcon whiteEmpty = new ImageIcon("empty.png");
-    private ImageIcon blackEmpty = new ImageIcon("empty2.png");
-    private ImageIcon white = new ImageIcon("white.png");
-    private ImageIcon red = new ImageIcon("red.png");
-    private ImageIcon whiteKing = new ImageIcon ("white-king.png");
-    private ImageIcon redKing = new ImageIcon("red-king.png");
-    private ImageIcon yellow = new ImageIcon("selected.png");
+    private final ImageIcon whiteEmpty = new ImageIcon("empty.png");
+    private final ImageIcon blackEmpty = new ImageIcon("empty2.png");
+    private final ImageIcon white = new ImageIcon("white.png");
+    private final ImageIcon red = new ImageIcon("red.png");
+    private final ImageIcon whiteKing = new ImageIcon ("white-king.png");
+    private final ImageIcon redKing = new ImageIcon("red-king.png");
+    private final ImageIcon yellow = new ImageIcon("selected.png");
 
 
     //Constructor
@@ -59,8 +59,8 @@ public class Square extends JButton{
 
     //Check if piece can move to square
     public boolean canMoveTo(Square other){
-            return other.isValidMove(this, false);
-        }
+        return other.isValidMove(this, false);
+    }
 
 
     //Check that valid piece is selected to move
