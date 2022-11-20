@@ -45,21 +45,15 @@ public class Square extends JButton{
 
 
     //Move piece
-    public void moveTo(Square other){
-        if (getString(this).startsWith("white") && other.getRow() == 1){
+    public void moveTo(Square other, boolean redTurn){
+        if (redTurn == false && other.getRow() == 1){
             other.setIcon(whiteKing);
-        } else if (getString(this).startsWith("red") && other.getRow() == 8){
+        } else if (redTurn == true && other.getRow() == 8){
             other.setIcon(redKing);
         } else {
             other.setIcon((ImageIcon)this.getIcon());
         }
         this.setIcon(whiteEmpty);
-    }
-
-
-    //Check if piece can move to square
-    public boolean canMoveTo(Square other){
-        return other.isValidMove(this, false);
     }
 
 
@@ -77,7 +71,7 @@ public class Square extends JButton{
         String firstIcon = getString(firstClick);
         if (firstIcon.equals(whiteEmpty.toString()) || firstIcon.equals(blackEmpty.toString()))
             return false;
-
+              
         //Is second selection empty
         String secondIcon = getString(this);
         if(!secondIcon.equals(whiteEmpty.toString()))
