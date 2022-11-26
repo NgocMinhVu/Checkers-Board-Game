@@ -165,6 +165,22 @@ public class Square extends JButton{
 
 
     public void removePiece(){
+        
+        if(this.getIcon().toString().startsWith("whiteKing")){
+            Board.whiteKingCounter--;
+            System.out.println("White King: " + Board.whiteKingCounter);
+        }else if(this.getIcon().toString().startsWith("redKing")){
+            Board.redKingCounter--;
+            System.out.println("Red King: " + Board.redKingCounter);
+        }else if(this.getIcon().toString().startsWith("red")){
+            Board.redCounter--;
+            System.out.println("Red : " + Board.redCounter);
+        }else{
+            Board.whiteCounter--;
+            System.out.println("White: " + Board.whiteCounter);
+        }
+
         this.setIcon(whiteEmpty);
+
     }
 }

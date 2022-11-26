@@ -6,6 +6,13 @@ public class Board implements ActionListener{
 
     private static Square[] squares = new Square[64];
     
+    // Initial Stats for sidepannel
+    public static int whiteCounter = 12;
+    public static int redCounter = 12;
+    public static int whiteKingCounter = 0;
+    public static int redKingCounter = 0;
+
+
     //Image object declaration
     private final ImageIcon whiteEmpty = new ImageIcon("empty.png");
     private final ImageIcon blackEmpty = new ImageIcon("empty2.png");
@@ -23,6 +30,7 @@ public class Board implements ActionListener{
     public Board(){
         createSquares();
         createBoard();
+        sideFrame();
     }
 
 
@@ -73,6 +81,63 @@ public class Board implements ActionListener{
             main.add(square);
         }
         main.setVisible(true);
+    }
+
+    // Creating the Side Frame
+    private void sideFrame(){
+
+        JFrame sideFrame = new JFrame();
+        sideFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        sideFrame.setSize(200,400);
+        sideFrame.setResizable(false);
+        sideFrame.setLocation(main.getX() + main.getWidth(), main.getY());
+        sideFrame.setLayout(new GridLayout(5,2));
+        sideFrame.setVisible(true);
+        
+        JLabel Image1 = new JLabel();
+        JLabel text2 = new JLabel();
+        JLabel Image2 = new JLabel();
+        JLabel text4 = new JLabel();
+        JLabel text5 = new JLabel(" ");
+        JLabel text6 = new JLabel(" ");
+        JLabel Image3 = new JLabel();
+        JLabel text8 = new JLabel();
+        JLabel Image4 = new JLabel();
+        JLabel text10 = new JLabel();
+        
+        // Formatting Text Displayed
+        text2.setHorizontalAlignment(SwingConstants.CENTER);
+        text2.setFont(new Font("Calibri", Font.PLAIN, 26));
+        text4.setHorizontalAlignment(SwingConstants.CENTER);
+        text4.setFont(new Font("Calibri", Font.PLAIN, 26));
+        text8.setHorizontalAlignment(SwingConstants.CENTER);
+        text8.setFont(new Font("Calibri", Font.PLAIN, 26));
+        text10.setHorizontalAlignment(SwingConstants.CENTER);
+        text10.setFont(new Font("Calibri", Font.PLAIN, 26));
+
+        Image1.setIcon(white);
+        Image2.setIcon(whiteKing);
+        Image3.setIcon(red);
+        Image4.setIcon(redKing);
+
+        text2.setText(String.valueOf(whiteCounter));
+        text4.setText(String.valueOf(whiteKingCounter));
+        text8.setText(String.valueOf(redCounter));
+        text10.setText(String.valueOf(redKingCounter));
+
+        // Add Components to Pannel
+        sideFrame.add(Image1);
+        sideFrame.add(text2);
+        sideFrame.add(Image2);
+        sideFrame.add(text4);
+        sideFrame.add(text5);
+        sideFrame.add(text6);
+        sideFrame.add(Image3);
+        sideFrame.add(text8);
+        sideFrame.add(Image4);
+        sideFrame.add(text10);
+
+       
     }
     
 
@@ -229,9 +294,9 @@ public class Board implements ActionListener{
 
         JLabel winMessage = new JLabel();
         if (redTurn == false){
-            winMessage.setText("The White has won! Congratulations!");
+            winMessage.setText("The White Team has won! Congratulations!");
         } else {
-            winMessage.setText("The Red has won! Congratulations!");
+            winMessage.setText("The Red Team has won! Congratulations!");
         }
         winMessage.setFont(new Font("Calibri", Font.PLAIN, 16));
         c.gridx = 0;
